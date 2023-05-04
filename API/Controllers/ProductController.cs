@@ -9,10 +9,19 @@ namespace API.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository _productRepository;
+        private readonly IGenericRepository<ProductBrand> _productBrandRepo;
+        private readonly IGenericRepository<ProductType> _productTypeRepo;
+        // private readonly IGenericRepository<Product> _productRepo;
 
-        public ProductController(IProductRepository productRepository)
+        public ProductController(
+            IProductRepository productRepository,
+            IGenericRepository<ProductBrand> productBrandRepo,
+            IGenericRepository<ProductType> productTypeRepo
+            )
         {
             _productRepository = productRepository;
+            _productBrandRepo = productBrandRepo;
+            _productTypeRepo = productTypeRepo;
         }
 
         [HttpGet("Products")]
