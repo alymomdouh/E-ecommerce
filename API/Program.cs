@@ -53,7 +53,7 @@ namespace API
             {
                 await context.Database.MigrateAsync();
                 //await identityContext.Database.MigrateAsync();
-                //await StoreContextSeed.SeedAsync(context);
+                await StoreContextSeed.SeedAsync(context);
                 //await AppIdentityDbContextSeed.SeedUserAsync(userManager);
             }
             catch (Exception ex)
