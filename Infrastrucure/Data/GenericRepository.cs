@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Interfaces;
+using Core.Specifications;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastrucure.Data
@@ -21,7 +22,7 @@ namespace Infrastrucure.Data
         {
             return await _context.Set<T>().ToListAsync();
         }
-        /*
+
         public async Task<T> GetEntityWithSpec(ISpecification<T> spec)
         {
             return await AppySpecification(spec).FirstOrDefaultAsync();
@@ -31,16 +32,17 @@ namespace Infrastrucure.Data
         {
             return await AppySpecification(spec).ToListAsync();
         }
+        /*
         public async Task<int> CountAsync(ISpecification<T> spec)
         {
             return await AppySpecification(spec).CountAsync();
         }
-
+        */
         private IQueryable<T> AppySpecification(ISpecification<T> spec)
         {
             return SpecificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
         }
-        */
+
         public void Add(T entity)
         {
             _context.Set<T>().Add(entity);
