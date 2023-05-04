@@ -13,14 +13,22 @@ namespace Infrastrucure.Data
         }
         public async Task<IReadOnlyList<Product>> GetProductsAsync()
         {
-            return await _context.Products
-               .ToListAsync();
+            return await _context.Products.ToListAsync();
         }
 
         public async Task<Product> GetProductsByIdAsync(int id)
         {
-            return await _context.Products
-                 .FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
         }
+
+        public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync()
+        {
+            return await _context.ProductTypes.ToListAsync();
+        }
+        public async Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync()
+        {
+            return await _context.ProductBrands.ToListAsync();
+        }
+
     }
 }
