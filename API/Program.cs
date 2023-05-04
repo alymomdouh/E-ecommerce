@@ -1,12 +1,13 @@
 using Core.Interfaces;
 using Infrastrucure.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -40,6 +41,25 @@ namespace API
 
             app.MapControllers();
 
+            // seed default data 
+            using var scope = app.Services.CreateScope();
+            var Services = scope.ServiceProvider;
+            var context = Services.GetRequiredService<StoreContext>();
+            //var identityContext = Services.GetRequiredService<AppIdentityDbContext>();
+           // var userManager = Services.GetRequiredService<UserManager<AppUser>>();
+            var Logger = Services.GetRequiredService<ILogger<Program>>();
+
+            try
+            {
+                await context.Database.MigrateAsync();
+                //await identityContext.Database.MigrateAsync();
+                //await StoreContextSeed.SeedAsync(context);
+                //await AppIdentityDbContextSeed.SeedUserAsync(userManager);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "Error occured while migrating process");
+            }
             app.Run();
         }
     }
