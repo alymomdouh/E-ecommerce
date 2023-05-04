@@ -1,3 +1,4 @@
+using Core.Interfaces;
 using Infrastrucure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,6 +21,8 @@ namespace API
             {
                 opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
             var app = builder.Build();
 
