@@ -36,6 +36,8 @@ namespace API
                 app.UseSwaggerUI();
             }
 
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthorization();
