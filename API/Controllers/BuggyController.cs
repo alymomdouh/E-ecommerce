@@ -1,4 +1,5 @@
-﻿using Infrastrucure.Data;
+﻿using API.Errors;
+using Infrastrucure.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -26,12 +27,12 @@ namespace API.Controllers
         {
             var thing = _context.Products.Find(50);
             var thingToReturn = thing.ToString();
-            return Ok();
+            return Ok(new ApiResponse(500));
         }
         [HttpGet("badrequest")]
         public IActionResult GetBadRequest()
         {
-            return BadRequest();
+            return BadRequest(new ApiResponse(400));
         }
 
         [HttpGet("badrequest/{id}")]
